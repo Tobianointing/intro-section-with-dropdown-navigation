@@ -1,30 +1,64 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react"
+import React from "react";
+import classNames from "classnames";
 
 function App() {
+  const [isDropDownOpen, setIsDropDownOpen] = React.useState<any>({});
+  const [isOpenNav, setIsOpenNav] = React.useState(false);
 
-  const [isMobileDrowOpen, setIsMobileDropOpen] = React.useState(false)
-  const [isOpenNav, setIsOpenNav] = React.useState(false)
+  const navClass = classNames("nav", { "open-nav": isOpenNav });
+  const menuClass = classNames("menus", { "open-menu": isOpenNav });
 
+  const handleDropDown = (
+    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    name: string
+  ) => {
+    setIsDropDownOpen((prevState: any) => {
+      return {
+        ...prevState,
+        [name]: prevState[name] ? !prevState[name] : true,
+      };
+    });
+  };
 
   return (
     <div className="container">
       <header>
         <img src="./images/logo.svg" alt="logo" />
 
-        <img className="menu-btn" src="./images/icon-menu.svg" alt="menu-icon" />
+        <img
+          className="menu-btn"
+          src="./images/icon-menu.svg"
+          alt="menu-icon"
+          onClick={() => setIsOpenNav(true)}
+        />
 
-        <nav>
-          <ul className="menus">
+        <nav className={navClass}>
+          <ul className={menuClass}>
             <li className="exit-btn">
-              <img src="./images/icon-close-menu.svg" alt="icon-close-menu" />
+              <img
+                src="./images/icon-close-menu.svg"
+                alt="icon-close-menu"
+                onClick={() => setIsOpenNav(false)}
+              />
             </li>
-            <li className="menu-item">
+            <li className="menu-item" onClick={(e) => handleDropDown(e, "left")}>
               <div>
                 <span>Features</span>
-                <img src="./images/icon-arrow-up.svg" alt="arrow-up" />
+                <img
+                  src={
+                    isDropDownOpen.left
+                      ? `./images/icon-arrow-up.svg`
+                      : `./images/icon-arrow-down.svg`
+                  }
+                  alt="arrow-up"
+                />
               </div>
-              <ul className="drop-down-menus dd-left">
+              <ul
+                className={`drop-down-menus dd-left ${
+                  isDropDownOpen.left && "open-dd"
+                }`}
+              >
                 <li className="dd-menu">
                   <a className="dd-link" href="#">
                     <img src="./images/icon-todo.svg" alt="dd-menu-img" />
@@ -52,12 +86,23 @@ function App() {
               </ul>
             </li>
 
-            <li className="menu-item">
+            <li className="menu-item" onClick={(e) => handleDropDown(e, "right")}>
               <div>
                 <span>Company</span>
-                <img src="./images/icon-arrow-up.svg" alt="arrow-up" />
+                <img
+                  src={
+                    isDropDownOpen.right
+                      ? `./images/icon-arrow-up.svg`
+                      : `./images/icon-arrow-down.svg`
+                  }
+                  alt="arrow-up"
+                />
               </div>
-              <ul className="drop-down-menus dd-right">
+              <ul
+                className={`drop-down-menus dd-right ${
+                  isDropDownOpen.right && "open-dd"
+                }`}
+              >
                 <li className="dd-menu">
                   <a className="dd-link" href="#">
                     History
@@ -101,8 +146,8 @@ function App() {
           <h1>Make remote work</h1>
           <p>
             {" "}
-            Get your team in sync, no matter your location. Streamline processes, create team
-            rituals, and watch productivity soar.
+            Get your team in sync, no matter your location. Streamline processes, create
+            team rituals, and watch productivity soar.
           </p>
           <button className="cta">Learn more</button>
 
@@ -116,7 +161,7 @@ function App() {
         <div className="right"></div>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

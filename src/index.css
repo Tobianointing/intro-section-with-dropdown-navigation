@@ -48,7 +48,7 @@ header {
   align-items: center;
 }
 
-nav {
+.nav {
   visibility: hidden;
   position: fixed;
   width: 100%;
@@ -58,6 +58,11 @@ nav {
   background-color: hsl(0deg 0% 8% / 80%);
   display: flex;
   justify-content: flex-end;
+  transition: all .3s;
+}
+
+.open-nav{
+  visibility: visible;
 }
 
 
@@ -76,30 +81,51 @@ ul {
   padding: 0;
 }
 
-ul.menus {
-  width: 70%;
+.menus {
+  width: 60%;
   height: 100%;
   background-color: var(--almost-white);
   margin: 0;
   padding-left: 2em;
+  transform: translateX(100%);
+  transition: all .3s;
+}
+
+.open-menu {
+  transform: translateX(0);
 }
 
 .exit-btn {
-  margin: 2em;
+  margin: 2em 1em;
   display: flex;
   justify-content: flex-end;
   cursor: pointer;
 }
 
 .menu-item {
-  padding: 0 0 1em;
+  padding: 0 0 1.5em;
   color: var(--med-gray);
   cursor: pointer;
 }
 
+.menu-item div {
+  display: flex;
+  gap: .5em;
+  align-items: center;
+}
+
 .drop-down-menus {
   padding: 1em 0 0 1em;
+  transform: translateY(-100%);
+  display: none;
+  transition: all .3s;
 }
+
+.open-dd {
+  transform: translateY(0);
+  display: block;
+}
+
 
 .dd-menu {
   padding: .5em;
@@ -114,9 +140,10 @@ ul.menus {
   flex-direction: column;
   gap: 1em;
   align-items: center;
-  width: 60%;
+  width: 100%;
   margin-top: 1em;
   font-size: .8rem;
+  margin-left: -1em;
 }
 
 .outline {
@@ -139,7 +166,6 @@ main {
   cursor: pointer;
 }
 
-
 .menu-item span {
   position: relative;
 }
@@ -157,7 +183,6 @@ main {
     height: 5px;
 
 } */
-
 
 .right {
   background: url("../public/images/image-hero-mobile.png") no-repeat;
@@ -215,8 +240,6 @@ main {
 }
 
 
-
-
 @media (min-width: 1024px) {
   .menu-btn {
     display: none;
@@ -238,7 +261,7 @@ main {
     gap: 3em;
   }
 
-  nav {
+  .nav {
     visibility: unset;
     background: unset;
     position: unset;
@@ -246,13 +269,13 @@ main {
     /* justify-content: flex-start; */
   }
 
-  ul.menus {
+  .menus {
     background: unset;
     display: flex;
     align-items: center;
     width: 100%;
     padding: 0;
-
+    transform: translateX(0);
   }
 
   .menu-item {
@@ -289,19 +312,21 @@ main {
     font-size: .8rem;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.12);
     transition: all .3s;
+    display: block;
   }
 
-  .menu-item:hover .drop-down-menus {
+  .open-dd {
     transform: translateY(0);
+    display: block;
   }
 
   .dd-left {
-    top: 20px;
+    top: 30px;
     left: -45px;
   }
 
   .dd-right {
-    top: 17px;
+    top: 25px;
     right: -20px;
   }
 
