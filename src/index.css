@@ -116,14 +116,16 @@ ul {
 
 .drop-down-menus {
   padding: 1em 0 0 1em;
-  transform: translateY(-100%);
-  display: none;
+  transform: translateX(100%);
+  height: 0;
+  visibility: hidden;
   transition: all .3s;
 }
 
 .open-dd {
-  transform: translateY(0);
-  display: block;
+  transform: translateX(0);
+  height: 100%;
+  visibility: visible;
 }
 
 
@@ -169,20 +171,6 @@ main {
 .menu-item span {
   position: relative;
 }
-
-/* .menu-item span::before {
-    content: "";
-    position: absolute;
-    background: url(/images/icon-arrow-down.svg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    top: 5px;
-    right: -15px;
-    z-index: -1;
-    width: 10px;
-    height: 5px;
-
-} */
 
 .right {
   background: url("../public/images/image-hero-mobile.png") no-repeat;
@@ -313,11 +301,12 @@ main {
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.12);
     transition: all .3s;
     display: block;
+    height: unset;
   }
 
   .open-dd {
     transform: translateY(0);
-    display: block;
+    visibility: visible;
   }
 
   .dd-left {
